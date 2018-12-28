@@ -26,8 +26,7 @@
    ### 3.change the column name of the data to as feature / measurement numbers
    ### 4.add the subject and activity as two separate column to the data
    ### 5.melt the data, and make each feature / measurement columns as a row.
-   ### 6.add the empty missing ('train' column in 'test' experiment and 
-   ###                          'test' column in 'train experiment)
+   ### 6.add the experiment_type column
    ### 7.return the reshaped data
 
    get_experiment_data <- function(experiment, measurements, activities ){
@@ -52,14 +51,11 @@
       experiment_data[ , "activity"] <- experiment_activity[,1]
 
       experiment_tidy_data <- melt(experiment_data, id.vars=c("subject", "activity"), 
-                                            variable.name=c('measurements'), value.name = experiment)
+                                            variable.name=c('measurements'), value.name = 'value')
 
-      if ( experiment == "train" ){
-         experiment_tidy_data$test <- ""
-      }
-      else if ( experiment == "test" ){
-        experiment_tidy_data$train <- ""
-      }
+      experiment_type <- rep(experiment, nrow(experiment_tidy_data))
+      experiment_tidy_data$experiment_type <- experiment_type
+
       experiment_tidy_data
    }
 
@@ -74,15 +70,14 @@
 
    ### convert data types
    shar_tidy_data$activity <- as.factor(shar_tidy_data$activity )
-   shar_tidy_data$train <- as.numeric(shar_tidy_data$train)
-   shar_tidy_data$test <- as.numeric(shar_tidy_data$test)
+   shar_tidy_data$value <- as.numeric(shar_tidy_data$value)
    
    ### write the data to the txt file
    write.table(shar_tidy_data, "shar_tidy_data.txt", row.name=FALSE)
 
    ### Calculate mean and std data
    mean_std_data <- shar_tidy_data %>% 
-            group_by(subject, activity, measurements) %>% 
+            group_by(subject, activity, experiment_type, measurements) %>% 
                 summarise_all(funs(mean, sd))
 
    ### Write mean and std data

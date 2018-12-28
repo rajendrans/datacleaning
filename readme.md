@@ -47,8 +47,7 @@ To run the R script, type the following command in the R shell
        * change the column name of the data to as feature / measurement numbers
        * add the subject and activity as two separate column to the data
        * melt the data, and make each feature / measurement columns as a row.
-       * add the empty missing ('train' column in 'test' experiment and 
-                         'test' column in 'train experiment)
+       * add the experiment_type column
        * return the reshaped data
    4. Merge train and test data
    5. Convert data types as required as numeric or factor
@@ -64,6 +63,7 @@ Once the scripts is successfully complete the following files will be created in
 current working directory
 
 'shar_tidy_data.txt' - The merged complete training and test data
+
 'shar_tidy_mean_std.txt' - The mean and standard deviation of each measurement per subject per activity
 
 Please refer the "code_book.pdf" file for the detail data information on both tidy data set files
