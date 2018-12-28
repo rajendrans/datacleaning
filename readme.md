@@ -32,7 +32,7 @@ copy these files into current working directory.
 
 To run the R script, type the following command in the R shell
 
-> source("shar_tidy.R")
+> source("run_analysis.R")
 
 
 ## Process / logical flow
