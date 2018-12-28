@@ -24,7 +24,7 @@ If you have not installed already, the script can install by un commenting the l
 
 ### Installing
 
-After successfully cloned the project to local computed.
+After successfully cloned the project to local computer.
 Change the working directory in the R shell or 
 copy these files into current working directory.
 
